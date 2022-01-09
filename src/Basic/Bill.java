@@ -8,23 +8,24 @@ import java.util.List;
 public class Bill {
     private int idBill;
     private int idPerson;
-    private List<Laptop> laptops = new ArrayList<>();
-    private double promotion;
-    private int totalMoney;
-    Calendar cal = Calendar.getInstance();
-    Date date = cal.getTime();
+    private List<Laptop> laptop = new ArrayList<>();
+    private double promotion ;
+//    Calendar cal = Calendar.getInstance();
+//    Date date = cal.getTime();
 
     public Bill() {
     }
 
-    public Bill(int idBill, int idPerson, List<Laptop> laptops, double promotion, int totalMoney, Date date) {
+    public Bill(int idBill, int idPerson, List<Laptop> laptop, double promotion, int totalMoney, Date date) {
         this.idBill = idBill;
         this.idPerson = idPerson;
-        this.laptops = laptops;
+        this.laptop = laptop;
         this.promotion = promotion;
-        this.totalMoney = totalMoney;
-        this.cal = cal;
-        this.date = date;
+
+//        this.date = date;
+    }
+
+    public Bill(int parseInt, int parseInt1, ArrayList<Laptop> laptop, double parseDouble) {
     }
 
     public int getIdBill() {
@@ -43,12 +44,12 @@ public class Bill {
         this.idPerson = idPerson;
     }
 
-    public List<Laptop> getLaptops() {
-        return laptops;
+    public List<Laptop> getLaptop() {
+        return laptop;
     }
 
-    public void setLaptops(List<Laptop> laptops) {
-        this.laptops = laptops;
+    public void setLaptop(List<Laptop> laptops) {
+        this.laptop = laptop;
     }
 
     public double getPromotion() {
@@ -59,31 +60,23 @@ public class Bill {
         this.promotion = promotion;
     }
 
-    public int getTotalMoney() {
-        return totalMoney;
-    }
 
-    public void setTotalMoney(int totalMoney) {
-        this.totalMoney = totalMoney;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
+//    public Date getDate() {
+//        return date;
+//    }
+//
+//    public void setDate(Date date) {
+//        this.date = date;
+//    }
 
     @Override
     public String toString() {
         return "Bill{" +
                 "idBill=" + idBill +
                 ", idPerson=" + idPerson +
-                ", laptops=" + laptops +
+                ", laptop=" + laptop +
                 ", promotion=" + promotion +
-                ", totalMoney=" + totalMoney +
-                ", date=" + date +
+//                ", date=" + date +
                 '}';
     }
 }

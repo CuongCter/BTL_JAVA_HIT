@@ -33,7 +33,7 @@ public class StoreController {
     public List<Laptop> writeStoreToFile(List<Laptop> laptops, String filename) throws IOException {
         fileController.OpenFileToWrite(filename);
         for(Laptop laptop : laptops) {
-            fileController.getPrintWriter().println(laptop.getId() + "|" + laptop.getBranch() + "|" + laptop.getName()+ "|" + laptop.getMaterial() + "|" + laptop.getCPU()+ "|" + laptop.getRAM()+ "|" + laptop.getDispaly()+ "|"+ laptop.getGeneration()+ "|"+ laptop.getPrice()+ "|"+ laptop.getInventory());
+            fileController.getPrintWriter().println(laptop.getId() + "|" + laptop.getName()+ "|" + laptop.getBranch() +  "|" + laptop.getMaterial() + "|" + laptop.getCPU()+ "|" + laptop.getRAM()+ "|" + laptop.getDispaly()+ "|"+ laptop.getGeneration()+ "|"+ laptop.getPrice()+ "|"+ laptop.getInventory());
         }
 
         fileController.CloseFileAfterWrite();

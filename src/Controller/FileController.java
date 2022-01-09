@@ -18,7 +18,7 @@ public class FileController {
 
     public void OpenFileToWrite(String fileName) {
         try {
-            fileWriter = new FileWriter(fileName, false);
+            fileWriter = new FileWriter(fileName, true);
             bufferedWriter = new BufferedWriter(fileWriter);
             printWriter = new PrintWriter(bufferedWriter);
 
