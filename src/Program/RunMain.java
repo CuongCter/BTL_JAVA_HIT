@@ -9,6 +9,7 @@ import Controller.PersonController;
 import Controller.StoreController;
 import Data.DataStore;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,18 +53,20 @@ public class RunMain {
 //        personController.writeUsersToFile(person, "Admin.DAT");
 
         BillController billController = new BillController();
-//        FileWriter fileWriter = new FileWriter("Bill.DAT", true);
+////        FileWriter fileWriter = new FileWriter("Bill.DAT", true);
         List<Bill> bill = billController.readBillFromFile("Bill.DAT");
 
         Check();
-    }
+  }
 
 
     private static void Check() throws IOException {
+
         int x;
         do{
             System.out.println("1. Dang nhap ");
-            System.out.println("2. EXIT ");
+            System.out.println("2. Dang ki ");
+            System.out.println("3. EXIT ");
             x=sc.nextInt();
             switch (x){
                 case 1:
@@ -71,6 +74,10 @@ public class RunMain {
                     System.out.println();
                     break;
                 case 2:
+                    SignUp();
+                    System.out.println();
+                    break;
+                case 3:
                     System.exit(0);
                     break;
                 default:
@@ -79,6 +86,45 @@ public class RunMain {
             }
         }while(x!=1 && x!=2);
     }
+
+    private static void SignUp() throws IOException{
+        List<Person> people = personController.readPersonsFromFile(DataStore.FILE_PERSON);
+        sc.nextLine();
+        String newTK, newMK, newMK2;
+        System.out.println("Nhap tai khoan moi: ");
+        newTK = sc.nextLine();
+        boolean check = true;
+        for(int i=0;i<people.size();i++){
+            if(people.get(i).getUserName().compareTo(newTK)==0){
+                System.out.println("Tai khong khoan hop le");
+                check = false;
+            }
+        }
+        if (check==true){
+            System.out.println("Tai khoan hop le: ");
+            System.out.println("Tao mat khau: ");;
+            newMK = sc.nextLine();
+            System.out.println("Xac nhan mat khau: ");
+            newMK2 = sc.nextLine();
+           if(newMK.equals(newMK2)==true){
+               System.out.println("Mat khau duoc xac nhan");
+               String hoTen,email,phone;
+               System.out.println("Nhap ho ten: "); hoTen = sc.nextLine();
+               System.out.println("Nhap email: "); email = sc.nextLine();
+               System.out.println("Nhap sdt: "); phone = sc.nextLine();
+
+               people.add(new Person(people.size()+1, newTK, newMK, email , hoTen, phone, "customer" ));
+               personController.writeUsersToFile(people,DataStore.FILE_PERSON);
+
+           }else{
+               System.out.println("Xac nhan mat khau sai");
+           }
+
+        }
+
+    }
+
+
 
     private static void Login() throws IOException {
         List<Person> persons = personController.readPersonsFromFile(DataStore.FILE_PERSON);
@@ -257,7 +303,8 @@ public class RunMain {
                 System.out.println("Khong tim thay san pham ");
             }
         }
-
+        System.out.println("Ban co muon lam gi nua khong");
+        AdminDo();
     }
 
     private static void FindBranch(List<Laptop> laptops) throws IOException {
@@ -277,9 +324,11 @@ public class RunMain {
                 System.out.println("Khong tim thay san pham nao");
             }
         }
+        System.out.println("Ban co muon lam gi nua khong");
+        AdminDo();
     }
 
-  
+
     private static void ShowLaptop(List<Laptop> laptops) throws IOException{
         laptops = storeController.readStoreFromFile("LaptopStore.DAT");
         for(int i=0;i<laptops.size();i++){
@@ -317,7 +366,7 @@ public class RunMain {
                     break;
                 default:
                     System.out.println("Lua chon khong phu hop");
-                    
+
             }
         }while(x<1||x>2);
 
