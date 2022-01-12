@@ -1,20 +1,18 @@
 package Program;
 
+
 import Basic.Bill;
-import Basic.Customer;
 import Basic.Laptop;
 import Basic.Person;
 import Controller.BillController;
-import Controller.FileController;
 import Controller.PersonController;
 import Controller.StoreController;
 import Data.DataStore;
 
-import javax.xml.crypto.Data;
-import java.awt.image.ImageProducer;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class RunMain {
 
@@ -23,7 +21,10 @@ public class RunMain {
     private static PersonController personController = new PersonController();
     private static BillController billController = new BillController();
     private static Scanner sc = new Scanner(System.in);
-//    private static List<Person> persons = new ArrayList<>();
+
+
+
+    //    private static List<Person> persons = new ArrayList<>();
     public static void main(String[] args) throws IOException {
 
         StoreController storeController = new StoreController();
@@ -83,9 +84,9 @@ public class RunMain {
         List<Person> persons = personController.readPersonsFromFile(DataStore.FILE_PERSON);
         String TK, MK;
         sc.nextLine();
-        System.out.println("Nhap tai khoan admin");
+        System.out.println("Nhap tai khoan ");
         TK = sc.nextLine();
-        System.out.println("Nhap mat khau  admin");
+        System.out.println("Nhap mat khau  ");
         MK = sc.nextLine();
         boolean check = false;
         for (int i = 0; i < persons.size(); i++) {
@@ -97,10 +98,9 @@ public class RunMain {
                 }else {
                     CustomerDo();
                 }
-            }
-
-            if (check == false) {
-                System.out.println("Ban da nhap sai hay dang nhap lai");
+                if (check == false) {
+                    System.out.println("Ban da nhap sai hay dang nhap lai");
+                }
             }
 
 
@@ -144,7 +144,7 @@ public class RunMain {
         System.out.println("5. Tim kiem san pham.");
         System.out.println("6. Them san pham vao cua hang shop.");
         System.out.println("7. Xoa san pham khoi cua hang.");
-        System.out.println("9. Xem doanh thu cua hang.");
+        System.out.println("8. Xem doanh thu cua hang.");
         System.out.println("0. Thoat");
         int x;
         List<Laptop> laptops = new ArrayList<>();
@@ -171,25 +171,22 @@ public class RunMain {
                     SortLaptop(laptops);
                     break;
                 case 5:
-                    System.out.println("Show Laptop5: ");
-
+                    System.out.println("Tim kiem: ");
+                    FindLaptop(laptops);
                     break;
                 case 6:
-                    System.out.println("Show Laptop6: ");
-
+                    System.out.println("Them mat hang: ");
+                    AddLaptop(laptops);
                     break;
                 case 7:
-                    System.out.println("Show Laptop7: ");
-
+                    System.out.println("Xoa mat hang: ");
+                    DeleteLaptop(laptops);
                     break;
                 case 8:
-                    System.out.println("Show Laptop8: ");
-
+                    System.out.println("Xem doanh thu: ");
+                    ShowTurnover(bills);
                     break;
-                case 9:
-                    System.out.println("Show Laptop9: ");
 
-                    break;
                 case 0:
                     return;
                 default:
@@ -200,6 +197,89 @@ public class RunMain {
 
     }
 
+    private static void ShowTurnover(List<Bill> bills) {
+    }
+
+    private static void DeleteLaptop(List<Laptop> laptops) {
+    }
+
+    private static void AddLaptop(List<Laptop> laptops) {
+
+    }
+
+    private static void FindLaptop(List<Laptop> laptops) throws IOException{
+        System.out.println("Cac loai hinh tim kiem laptop");
+        int x;
+        do {
+            System.out.println("Moi ban lua chon hinh thuc: ");
+            System.out.println("1. Theo ID");
+            System.out.println("2. Theo theo hang");
+            System.out.println("3. Theo ten");
+            x= sc.nextInt();
+
+            switch (x){
+                case 1:
+                    System.out.println("Tim kiem theo ID");
+                    FindID(laptops);
+                    break;
+                case 2:
+                    System.out.println("Tim kiem theo hang");
+                    FindBranch(laptops);
+                    break;
+                case 3:
+                    System.out.println("Tim kiem theo ten");
+                    FindName(laptops);
+                    break;
+                default:
+                    System.out.println("Lua chon khong phu hop");
+
+            }
+        }while(x<1||x>3);
+    }
+
+    private static void FindID(List<Laptop> laptops) {
+    }
+
+    private static void FindName(List<Laptop> laptops) throws IOException {
+        sc.nextLine();
+        System.out.println("Nhap ten can tim: ");
+        String x;
+        x = sc.nextLine();
+        laptops = storeController.readStoreFromFile(DataStore.FILE_STORE);
+        System.out.println("San pham can tim: ");
+        int cnt=0;
+        for (int i=0;i<laptops.size();i++) {
+            if (laptops.get(i).getBranch().compareTo(x) == 0) {
+                System.out.println(laptops.get(i));
+                cnt++;
+            }
+            if (cnt == 0) {
+                System.out.println("Khong tim thay san pham ");
+            }
+        }
+
+    }
+
+    private static void FindBranch(List<Laptop> laptops) throws IOException {
+            sc.nextLine();
+        System.out.println("Nhap hang can tim: ");
+        String x;
+        x = sc.nextLine();
+        laptops = storeController.readStoreFromFile(DataStore.FILE_STORE);
+        System.out.println("San pham can tim: ");
+        int cnt = 0;
+        for (int i=0;i<laptops.size();i++){
+            if (laptops.get(i).getBranch().compareTo(x)==0){
+                cnt++;
+                System.out.println(laptops.get(i));
+            }
+            if(cnt==0){
+                System.out.println("Khong tim thay san pham nao");
+            }
+        }
+    }
+
+  
     private static void ShowLaptop(List<Laptop> laptops) throws IOException{
         laptops = storeController.readStoreFromFile("LaptopStore.DAT");
         for(int i=0;i<laptops.size();i++){
@@ -245,9 +325,36 @@ public class RunMain {
 
     }
 
-    private static void SortPrice(List<Laptop> laptops) {
+    private static void SortPrice(List<Laptop> laptops) throws IOException{
+        System.out.println("Sap xep mat hang theo tien: ");
+        for(int i=0;i<laptops.size();i++){
+            for(int j=i+1;j<laptops.size();j++){
+                if(laptops.get(i).getPrice() > laptops.get(j).getPrice()){
+                    Laptop temp = laptops.get(i);
+                    laptops.set(i,laptops.get(j));
+                    laptops.set(j,temp);
+                }
+            }
+        }
+        storeController.writeStoreToFile(laptops,"LaptopStore.DAT");
+        ShowLaptop(laptops);
     }
 
-    private static void SortID(List<Laptop> laptops) {
+    private static void SortID(List<Laptop> laptops) throws IOException{
+        System.out.println("Sap xep mat hang theo ID: ");
+        for(int i=0;i<laptops.size();i++){
+            for(int j=i+1;j<laptops.size();j++){
+                if(laptops.get(i).getId() > laptops.get(j).getId()){
+                    Laptop temp = laptops.get(i);
+                    laptops.set(i,laptops.get(j));
+                    laptops.set(j,temp);
+                }
+            }
+        }
+        storeController.writeStoreToFile(laptops,"LaptopStore.DAT");
+        ShowLaptop(laptops);
     }
+
 }
+
+
