@@ -7,7 +7,7 @@ public class Laptop {
     private String material;
     private String CPU;
     private String RAM;
-    private String dispaly;
+    private String display;
     private String generation;
     private int price;
     private int inventory;
@@ -15,14 +15,14 @@ public class Laptop {
     public Laptop() {
     }
 
-    public Laptop(int id, String name, String branch, String material, String CPU, String RAM, String dispaly, String generation, int price, int inventory) {
+    public Laptop(int id, String name, String branch, String material, String CPU, String RAM, String display, String generation, int price, int inventory) {
         this.id = id;
         this.name = name;
         this.branch = branch;
         this.material = material;
         this.CPU = CPU;
         this.RAM = RAM;
-        this.dispaly = dispaly;
+        this.display = display;
         this.generation = generation;
         this.price = price;
         this.inventory = inventory;
@@ -76,12 +76,12 @@ public class Laptop {
         this.RAM = RAM;
     }
 
-    public String getDispaly() {
-        return dispaly;
+    public String getDisplay() {
+        return display;
     }
 
-    public void setDispaly(String dispaly) {
-        this.dispaly = dispaly;
+    public void setDisplay(String display) {
+        this.display = display;
     }
 
     public String getGeneration() {
@@ -117,7 +117,7 @@ public class Laptop {
                 ", material='" + material + '\'' +
                 ", CPU='" + CPU + '\'' +
                 ", RAM='" + RAM + '\'' +
-                ", dispaly='" + dispaly + '\'' +
+                ", dispaly='" + display + '\'' +
                 ", generation='" + generation + '\'' +
                 ", price=" + price +
                 ", inventory=" + inventory +

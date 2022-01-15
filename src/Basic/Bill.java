@@ -10,22 +10,19 @@ public class Bill {
     private int idPerson;
     private List<Laptop> laptop = new ArrayList<>();
     private double promotion ;
-//    Calendar cal = Calendar.getInstance();
-//    Date date = cal.getTime();
-
+    private String date;
     public Bill() {
     }
 
-    public Bill(int idBill, int idPerson, List<Laptop> laptop, double promotion, int totalMoney, Date date) {
-        this.idBill = idBill;
-        this.idPerson = idPerson;
-        this.laptop = laptop;
-        this.promotion = promotion;
-
-//        this.date = date;
-    }
-
-    public Bill(int parseInt, int parseInt1, ArrayList<Laptop> laptop, double parseDouble) {
+    @Override
+    public String toString() {
+        return "Bill{" +
+                "idBill=" + idBill +
+                ", idPerson=" + idPerson +
+                ", laptop=" + laptop +
+                ", promotion=" + promotion +
+                ", date='" + date + '\'' +
+                '}';
     }
 
     public int getIdBill() {
@@ -48,7 +45,7 @@ public class Bill {
         return laptop;
     }
 
-    public void setLaptop(List<Laptop> laptops) {
+    public void setLaptop(List<Laptop> laptop) {
         this.laptop = laptop;
     }
 
@@ -60,23 +57,19 @@ public class Bill {
         this.promotion = promotion;
     }
 
+    public String getDate() {
+        return date;
+    }
 
-//    public Date getDate() {
-//        return date;
-//    }
-//
-//    public void setDate(Date date) {
-//        this.date = date;
-//    }
+    public void setDate(String date) {
+        this.date = date;
+    }
 
-    @Override
-    public String toString() {
-        return "Bill{" +
-                "idBill=" + idBill +
-                ", idPerson=" + idPerson +
-                ", laptop=" + laptop +
-                ", promotion=" + promotion +
-//                ", date=" + date +
-                '}';
+    public Bill(int idBill, int idPerson, List<Laptop> laptop, double promotion, String date) {
+        this.idBill = idBill;
+        this.idPerson = idPerson;
+        this.laptop = laptop;
+        this.promotion = promotion;
+        this.date = date;
     }
 }

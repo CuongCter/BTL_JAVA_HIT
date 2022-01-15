@@ -5,6 +5,7 @@ import Basic.Laptop;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class BillController {
@@ -21,15 +22,15 @@ public class BillController {
     public List<Bill> readBillFromFile(String filename) throws IOException{
         fileController.OpenFileToRead(filename);
         List<Bill> bills = new ArrayList<>();
-
+        StoreController storeController = new StoreController();
         while(fileController.getScanner().hasNext()){
             String data = fileController.getScanner().nextLine();
             String[] a = data.split("\\|");
             ArrayList<Laptop> laptop = new ArrayList<>();
-            for(int i=0;i<a.length;i++){
-                laptop.add(new Laptop(Integer.parseInt(a[0]),a[1], a[2], a[3], a[4], a[5], a[6], a[7], Integer.parseInt(a[8]),Integer.parseInt(a[9])));
+            for(int i=2;i<a.length-2;i++){
+                laptop.add(storeController.getlaptopBuy(Integer.parseInt(a[i])));
             }
-            bills.add(new Bill(Integer.parseInt(a[0]), Integer.parseInt(a[1]),laptop, Double.parseDouble(a[3])));
+            bills.add(new Bill(Integer.parseInt(a[0]), Integer.parseInt(a[1]),laptop, Double.parseDouble(a[a.length-2]),a[a.length-1]));
 
         }
         fileController.CloseFileAfterRead(filename);
@@ -37,11 +38,24 @@ public class BillController {
         return bills;
     }
     public void writeBillToFile(List<Bill> bills, String filename) throws IOException {
+
         fileController.OpenFileToWrite(filename);
         for(Bill bill : bills) {
-            fileController.getPrintWriter().println(bill.getIdBill() + "|" + bill.getIdPerson() + "|" + bill.getLaptop() + "|" + bill.getPromotion() );
+            String s = "";
+            for (int j=0;j<bill.getLaptop().size();j++){
+                s += bill.getLaptop().get(j).getId();
+            }
+            fileController.getPrintWriter().println(bill.getIdBill() + "|" + bill.getIdPerson() + "|" + s + "|" + bill.getPromotion() + "|" + bill.getDate()) ;
         }
 
         fileController.CloseFileAfterWrite();
+    }
+
+    public String Date(){
+        Calendar cal = Calendar.getInstance();
+        String date = "";
+        date = cal.get(Calendar.DAY_OF_MONTH)+"/"+cal.get(Calendar.MONTH+1)+"/"+cal.get(Calendar.YEAR);
+        return date;
+
     }
 }

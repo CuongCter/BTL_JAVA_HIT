@@ -2,6 +2,7 @@ package Controller;
 
 import Basic.Laptop;
 import Basic.Person;
+import Data.DataStore;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,10 +34,21 @@ public class StoreController {
     public List<Laptop> writeStoreToFile(List<Laptop> laptops, String filename) throws IOException {
         fileController.OpenFileToWrite(filename);
         for(Laptop laptop : laptops) {
-            fileController.getPrintWriter().println(laptop.getId() + "|" + laptop.getName()+ "|" + laptop.getBranch() +  "|" + laptop.getMaterial() + "|" + laptop.getCPU()+ "|" + laptop.getRAM()+ "|" + laptop.getDispaly()+ "|"+ laptop.getGeneration()+ "|"+ laptop.getPrice()+ "|"+ laptop.getInventory());
+            fileController.getPrintWriter().println(laptop.getId() + "|" + laptop.getName()+ "|" + laptop.getBranch() +  "|" + laptop.getMaterial() + "|" + laptop.getCPU()+ "|" + laptop.getRAM()+ "|" + laptop.getDisplay()+ "|"+ laptop.getGeneration()+ "|"+ laptop.getPrice()+ "|"+ laptop.getInventory());
         }
 
         fileController.CloseFileAfterWrite();
         return laptops;
     }
+    public Laptop getlaptopBuy(int a) throws IOException {
+        List<Laptop> laptops = readStoreFromFile(DataStore.FILE_STORE);
+        for(int i=0;i<laptops.size();i++){
+            if(a == laptops.get(i).getId()){
+                return laptops.get(i);
+            }
+        }
+        return null;
+    }
+
+
 }
