@@ -20,7 +20,6 @@ public class Bill {
                 "idBill=" + idBill +
                 ", idPerson=" + idPerson +
                 ", laptop=" + laptop +
-                ", promotion=" + promotion +
                 ", date='" + date + '\'' +
                 '}';
     }

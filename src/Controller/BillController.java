@@ -45,7 +45,7 @@ public class BillController {
             for (int j=0;j<bill.getLaptop().size();j++){
                 s += bill.getLaptop().get(j).getId();
             }
-            fileController.getPrintWriter().println(bill.getIdBill() + "|" + bill.getIdPerson() + "|" + s + "|" + bill.getPromotion() + "|" + bill.getDate()) ;
+            fileController.getPrintWriter().println(bill.getIdBill() + "|" + bill.getIdPerson() + "|" + s +  "|" + bill.getDate()) ;
         }
 
         fileController.CloseFileAfterWrite();
@@ -54,7 +54,7 @@ public class BillController {
     public String Date(){
         Calendar cal = Calendar.getInstance();
         String date = "";
-        date = cal.get(Calendar.DAY_OF_MONTH)+"/"+cal.get(Calendar.MONTH+1)+"/"+cal.get(Calendar.YEAR);
+        date = cal.get(Calendar.DAY_OF_MONTH)+"/"+cal.get(Calendar.MONTH)+"/"+cal.get(Calendar.YEAR);
         return date;
 
     }
